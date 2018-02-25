@@ -23,6 +23,16 @@ public class Match {
         this.guestTeamScote = guestTeamScote;
     }
 
+    public Match(int matchId, Team homeTeam, Team guestTeam, Date matchday, String stadium, int homeTeamScore, int guestTeamScote) {
+        this.matchId = matchId;
+        this.homeTeam = homeTeam;
+        this.guestTeam = guestTeam;
+        this.matchday = matchday;
+        this.stadium = stadium;
+        this.homeTeamScore = homeTeamScore;
+        this.guestTeamScote = guestTeamScote;
+    }
+
     public int getMatchId() {
         return matchId;
     }

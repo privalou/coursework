@@ -19,6 +19,23 @@ public class Team {
         this.currentStanding = currentStanding;
     }
 
+    public Team(int teamId, String teamName, int points, int goalsFor, int goalsAgainst, int currentStanding) {
+        this.teamId = teamId;
+        this.teamName = teamName;
+        this.points = points;
+        this.goalsFor = goalsFor;
+        this.goalsAgainst = goalsAgainst;
+        this.currentStanding = currentStanding;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+
     public String getTeamName() {
         return teamName;
     }

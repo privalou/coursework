@@ -3,6 +3,7 @@ package model;
 public interface PlayersPositions {
     String GOALKEEPER = "Goalkeeper";
     String CENTREBACK = "Centre-back";
+    String DEFENDER = "Defender";
     String SWEEPER = "Sweeper";
     String FULLBACK = "Full-back";
     String WINGBACK = "Wing-back";

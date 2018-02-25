@@ -21,6 +21,14 @@ public class Player {
         return playerId;
     }
 
+    public Player(int playerId, String playerName, int number, String playerPosition, Team team) {
+        this.playerId = playerId;
+        this.playerName = playerName;
+        this.number = number;
+        this.playerPosition = playerPosition;
+        this.team = team;
+    }
+
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
     }
