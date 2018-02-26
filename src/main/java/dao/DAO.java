@@ -40,31 +40,4 @@ public abstract class DAO {
         properties.setProperty("useUnicode", "true");
         properties.setProperty("characterEncoding", "utf8");
     }
-
-    public void execute(final String sql) {
-        try {
-            Statement statement = getConnection().createStatement();
-            statement.execute(sql);
-            getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public ResultSet executePreparedStatement(final String sql, @Nullable String... params) {
-        ResultSet result = null;
-        try {
-            PreparedStatement statement = getConnection().prepareStatement(sql);
-            if (params != null) {
-                for (int i = 0; i < params.length; i++) {
-                    statement.setString(i + 1, params[i]);
-                }
-            }
-            result = statement.executeQuery();
-            getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
 }

@@ -1,11 +1,9 @@
 package dao.impl;
 
-import com.sun.org.apache.regexp.internal.RE;
 import dao.DAO;
 import dao.TeamDAO;
 import model.Team;
 
-import javax.management.Query;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,8 +39,9 @@ public class TeamDAOImpl implements TeamDAO {
     public List<Team> getTeams() {
         String query = "SELECT * FROM TEAM ORDER BY current_standing";
         List<Team> teams = new ArrayList<>();
-        ResultSet resultSet = dao.executePreparedStatement(query, null);
         try {
+            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(TEAM_ID);
                 String teamName = resultSet.getString(TEAM_NAME);
@@ -65,8 +64,10 @@ public class TeamDAOImpl implements TeamDAO {
     public Team getTeam(String teamName) {
         String query = "SELECT * FROM team WHERE team_name = ?";
         Team team = null;
-        ResultSet resultSet = dao.executePreparedStatement(query, new String[]{teamName});
         try {
+            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, teamName);
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 int id = resultSet.getInt(TEAM_ID);
                 String name = resultSet.getString(TEAM_NAME);
