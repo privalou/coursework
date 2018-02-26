@@ -20,6 +20,8 @@ public interface PlayerDAO {
 
     List<Player> getPlayers();
 
+    List<Player> getPlayers(int teamId);
+
     Player getPlayer(String playerName);
 
     Player getPlayer(int playerId);

@@ -4,6 +4,7 @@ import dao.DAO;
 import dao.PlayerDAO;
 import model.Player;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,8 +22,8 @@ public class PlayerDAOImpl implements PlayerDAO {
     public void addPlayer(Player player) {
         String query = "INSERT INTO player (player_name, number, playing_position, team_id) VALUES " +
                 "(?,?,?,?)";
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, player.getPlayerName());
             preparedStatement.setInt(2, player.getNumber());
             preparedStatement.setString(3, player.getPlayerPosition());
@@ -30,8 +31,6 @@ public class PlayerDAOImpl implements PlayerDAO {
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
     }
 
@@ -39,8 +38,8 @@ public class PlayerDAOImpl implements PlayerDAO {
     public List<Player> getPlayers() {
         List<Player> players = new ArrayList<>();
         String query = "SELECT * FROM player";
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int playerId = resultSet.getInt(TEAM_ID);
@@ -53,8 +52,29 @@ public class PlayerDAOImpl implements PlayerDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
+        }
+        return players;
+    }
+
+    @Override
+    public List<Player> getPlayers(int teamId) {
+        List<Player> players = new ArrayList<>();
+        String query = "SELECT * FROM player WHERE team_id = ? ORDER BY PLAYING_POSITION";
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, teamId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int playerId = resultSet.getInt(PLAYER_ID);
+                String playerName = resultSet.getString(PLAYER_NAME);
+                int number = resultSet.getInt(NUMBER);
+                String playingPosition = resultSet.getString(PLAYING_POSITION);
+                int id = resultSet.getInt(TEAM_ID);
+                Player player = new Player(playerId, playerName, number, playingPosition, id);
+                players.add(player);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return players;
     }
@@ -63,8 +83,8 @@ public class PlayerDAOImpl implements PlayerDAO {
     public Player getPlayer(String playerName) {
         Player player = null;
         String query = "SELECT * FROM player WHERE player_name = ?";
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, playerName);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -77,8 +97,6 @@ public class PlayerDAOImpl implements PlayerDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
         return player;
     }
@@ -87,8 +105,8 @@ public class PlayerDAOImpl implements PlayerDAO {
     public Player getPlayer(int playerId) {
         Player player = null;
         String query = "SELECT * FROM player WHERE player_id = ?";
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, playerId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -101,8 +119,6 @@ public class PlayerDAOImpl implements PlayerDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
         return player;
     }
@@ -111,8 +127,8 @@ public class PlayerDAOImpl implements PlayerDAO {
     public void updatePlayer(Player player) {
         String query = "UPDATE player SET player_name = ? , number = ? , playing_position = ? , team_id = ?,  " +
                 "WHERE player_id = ?";
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, player.getPlayerName());
             preparedStatement.setInt(2, player.getNumber());
             preparedStatement.setString(3, player.getPlayerPosition());
@@ -121,22 +137,18 @@ public class PlayerDAOImpl implements PlayerDAO {
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
     }
 
     @Override
     public void deletePlayer(Player player) {
         String query = "DELETE player WHERE player_id = ?";
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, player.getPlayerId());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
     }
 }

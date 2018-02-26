@@ -4,6 +4,7 @@ import dao.DAO;
 import dao.TeamDAO;
 import model.Team;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,8 +22,8 @@ public class TeamDAOImpl implements TeamDAO {
     public void addTeam(Team team) {
         String query = "INSERT INTO team (team_name, points, goals_for, goals_against, current_standing) " +
                 "(?,?,?,?,?)";
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, team.getTeamName());
             preparedStatement.setInt(2, team.getPoints());
             preparedStatement.setInt(3, team.getGoalsFor());
@@ -30,8 +31,6 @@ public class TeamDAOImpl implements TeamDAO {
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
     }
 
@@ -39,8 +38,8 @@ public class TeamDAOImpl implements TeamDAO {
     public List<Team> getTeams() {
         String query = "SELECT * FROM TEAM ORDER BY current_standing";
         List<Team> teams = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(TEAM_ID);
@@ -54,8 +53,6 @@ public class TeamDAOImpl implements TeamDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
         return teams;
     }
@@ -64,8 +61,8 @@ public class TeamDAOImpl implements TeamDAO {
     public Team getTeam(String teamName) {
         String query = "SELECT * FROM team WHERE team_name = ?";
         Team team = null;
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, teamName);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -79,8 +76,6 @@ public class TeamDAOImpl implements TeamDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
         return team;
     }
@@ -89,7 +84,7 @@ public class TeamDAOImpl implements TeamDAO {
     public Team getTeam(int teamId) {
         String query = "SELECT * FROM team WHERE team_id = ?";
         Team team = null;
-        try {
+        try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
             preparedStatement.setInt(1, teamId);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -104,8 +99,6 @@ public class TeamDAOImpl implements TeamDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
         return team;
     }
@@ -115,8 +108,8 @@ public class TeamDAOImpl implements TeamDAO {
         String query = "UPDATE TEAM SET TEAM_NAME = ? , POINTS = ? , GOALS_FOR = ? , GOALS_AGAINST = ?, " +
                 "CURRENT_STANDING = ? " +
                 "WHERE TEAM_ID = ?";
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, team.getTeamName());
             preparedStatement.setInt(2, team.getPoints());
             preparedStatement.setInt(3, team.getGoalsFor());
@@ -126,22 +119,18 @@ public class TeamDAOImpl implements TeamDAO {
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
     }
 
     @Override
     public void deleteTeam(Team team) {
         String query = "DELETE team WHERE TEAM_ID = ?";
-        try {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, team.getTeamId());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            dao.closeConnection();
         }
     }
 }

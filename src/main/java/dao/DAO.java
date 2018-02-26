@@ -28,8 +28,6 @@ public abstract class DAO {
 
     public abstract Connection getConnection();
 
-    public abstract void closeConnection();
-
     public void connect(String login, String password) {
         registerDriverManager();
         properties = new Properties();

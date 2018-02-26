@@ -1,0 +1,88 @@
+@import "http://fonts.fontstorage.com/import/caviar.css";
+.header{
+    background-color: rgba(198, 198, 198, 0.65);
+    font-family: 'Caviar Dreams';
+    margin:30px 200px;
+    color: #000;
+    border-radius:6px;
+    -webkit-border-radius:6px;
+    -moz-border-radius:5px;
+    -khtml-border-radius:10px;
+    
+}
+.description {   
+    background-color: rgba(236, 236, 236, 0.65);
+    color: #000000;
+    font-family: 'Caviar Dreams';
+    font-size: 12px;
+    margin:30px 200px;
+    padding: 10px 10px 10px 20px;
+    color: #000;
+
+    border-radius:6px; 
+
+}
+.button{
+    font-family: 'Caviar Dreams';
+    display: block;
+    margin: 10px auto 5px;
+    width: 130px;
+    height: 30px;
+    background: transparent;
+    border: 1px solid #305CD7;
+    color: #595959;
+    outline: none;
+}
+.textbox{
+    margin: 10px auto 5px;
+    font-family: 'Caviar Dreams';
+    width: 130px;
+}
+.table {
+    margin:15px auto 20px auto;
+    font-family: 'Caviar Dreams';
+    border: 1px solid #1a1a1a;
+    width: 50%;
+    padding: 0;
+    border-radius: 6px 6px 6px 6px; 
+}
+
+.table  td {
+    text-align: center;
+    padding: 10px 10px;
+    background: rgba(221, 221, 221, 0.75);
+}
+
+.table th, td {
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: black;
+    border-radius: 6px 6px 6px 6px; 
+}
+
+.table thead td
+{
+    background-color: #2684b5;
+    background-image:radial-gradient(at center, #0098b5, #2684b5);
+    color: white;
+}
+
+img{
+    width:50%; 
+    border-radius: 6px 6px 6px 6px;      
+}
+.href{
+    margin:48% ;
+    background: radial-gradient(at center, #cce0ff, #66a3ff); /* Градиент */ 
+    border: 1px solid #595959;
+    border-radius: 3px; 
+    padding: 5px 15px; 
+    text-decoration: none;
+    color: #595959; /* Цвет текста */
+    font-family: 'Caviar Dreams';
+  }
+  .href:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.1); /* Тень */
+    color: #FF9E00;
+   }
+

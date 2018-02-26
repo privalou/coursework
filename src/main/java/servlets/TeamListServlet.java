@@ -11,13 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-
-@WebServlet("/index.jsp")
-public class TeamsListServlet extends HttpServlet {
+@WebServlet("/teamList")
+public class TeamListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,10 +24,10 @@ public class TeamsListServlet extends HttpServlet {
         dao.connect(DAOPostgres.DEFAULT_LOGIN, DAOPostgres.DEFAULT_PASSWORD);
         TeamDAO teamDAO = new TeamDAOImpl(dao);
         List<Team> teams = teamDAO.getTeams();
-        HttpSession session = req.getSession();
-        session.setAttribute("teams", teams);
         req.setAttribute("teams", teams);
-        resp.sendRedirect("http://localhost:8080/teamList.jsp");
+        req.setAttribute("dao", dao);
+        req.setAttribute("teamDao", teamDAO);
+        req.setAttribute("teams", teams);
+        req.getRequestDispatcher("teamList.jsp").forward(req,resp);
     }
-
 }

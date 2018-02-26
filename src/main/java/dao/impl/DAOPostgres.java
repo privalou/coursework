@@ -27,21 +27,14 @@ public class DAOPostgres extends DAO {
 
     @Override
     public Connection getConnection() {
+        Connection connection = null;
         try {
-            return DriverManager.getConnection(url,properties);
+            connection = DriverManager.getConnection(url, properties);
+            return connection;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
-    }
-
-    @Override
-    public void closeConnection() {
-        try {
-            getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return connection;
     }
 
 
