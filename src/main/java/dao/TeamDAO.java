@@ -17,15 +17,15 @@ public interface TeamDAO {
 
     String CURRENT_STANDING = "current_standing";
 
-    public void addTeam(Team team);
+    void addTeam(Team team);
 
-    public List<Team> getTeams();
+    List<Team> getTeams();
 
-    public Team getTeam(String teamName);
+    Team getTeam(String teamName);
 
-    public Team getTeam(int teamId);
+    Team getTeam(int teamId);
 
-    public void updateTeam(Team team);
+    void updateTeam(Team team);
 
-    public void deleteTeam(Team team);
+    void deleteTeam(Team team);
 }

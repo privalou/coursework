@@ -1,8 +1,6 @@
 package dao;
 
-import com.sun.istack.internal.Nullable;
-
-import java.sql.*;
+import java.sql.Connection;
 import java.util.Properties;
 
 public abstract class DAO {

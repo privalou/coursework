@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DAOPostgres extends DAO {
-    private Connection connection = null;
     public static final String DEFAULT_HOST = "localhost";
     public static final String DEFAULT_DATABASE = "coursework";
     public static final String DEFAULT_LOGIN = "postgres";

@@ -68,12 +68,12 @@ public class PlayerDAOImpl implements PlayerDAO {
             preparedStatement.setString(1, playerName);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                int playerId = resultSet.getInt(TEAM_ID);
+                int playerId = resultSet.getInt(PLAYER_ID);
                 String name = resultSet.getString(PLAYER_NAME);
                 int number = resultSet.getInt(NUMBER);
                 String playingPosition = resultSet.getString(PLAYING_POSITION);
                 int teamId = resultSet.getInt(TEAM_ID);
-                player = new Player(playerId, playerName, number, playingPosition, teamId);
+                player = new Player(playerId, name, number, playingPosition, teamId);
             }
         } catch (SQLException e) {
             e.printStackTrace();

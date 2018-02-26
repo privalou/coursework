@@ -16,15 +16,15 @@ public interface PlayerDAO {
 
     String TEAM_ID = "team_id";
 
-    public void addPlayer(Player player);
+    void addPlayer(Player player);
 
-    public List<Player> getPlayers();
+    List<Player> getPlayers();
 
-    public Player getPlayer(String playerName);
+    Player getPlayer(String playerName);
 
-    public Player getPlayer(int playerId);
+    Player getPlayer(int playerId);
 
-    public void updatePlayer(Player player);
+    void updatePlayer(Player player);
 
-    public void deletePlayer(Player player);
+    void deletePlayer(Player player);
 }

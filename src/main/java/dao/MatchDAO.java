@@ -20,17 +20,17 @@ public interface MatchDAO {
 
     String GUEST_TEAM_SCORE = "guest_team_score";
 
-    public void addMatch(Match match);
+    void addMatch(Match match);
 
-    public List<Match> getMatches();
+    List<Match> getMatches();
 
-    public List<Match> getMatches(Date matchday);
+    List<Match> getMatches(Date matchday);
 
-    public Match getMatch(String stadium);
+    Match getMatch(String stadium);
 
-    public Match getMatch(int matchId);
+    Match getMatch(int matchId);
 
-    public void updateMatch(Match match);
+    void updateMatch(Match match);
 
-    public void deleteMatch(Match match);
+    void deleteMatch(Match match);
 }
