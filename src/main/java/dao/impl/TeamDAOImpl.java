@@ -25,15 +25,14 @@ public class TeamDAOImpl implements TeamDAO {
                 "(?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
-            preparedStatement.setString(1,team.getTeamName());
-            preparedStatement.setInt(2,team.getPoints());
-            preparedStatement.setInt(3,team.getGoalsFor());
-            preparedStatement.setInt(4,team.getCurrentStanding());
+            preparedStatement.setString(1, team.getTeamName());
+            preparedStatement.setInt(2, team.getPoints());
+            preparedStatement.setInt(3, team.getGoalsFor());
+            preparedStatement.setInt(4, team.getCurrentStanding());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             dao.closeConnection();
         }
     }
@@ -44,20 +43,19 @@ public class TeamDAOImpl implements TeamDAO {
         List<Team> teams = new ArrayList<>();
         ResultSet resultSet = dao.executePreparedStatement(query, null);
         try {
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt(TEAM_ID);
                 String teamName = resultSet.getString(TEAM_NAME);
                 int points = resultSet.getInt(POINTS);
                 int goalsFor = resultSet.getInt(GOALS_FOR);
                 int goalsAgainst = resultSet.getInt(GOALS_AGAINST);
                 int standing = resultSet.getInt(CURRENT_STANDING);
-                Team team = new Team(id,teamName,points,goalsFor,goalsAgainst,standing);
+                Team team = new Team(id, teamName, points, goalsFor, goalsAgainst, standing);
                 teams.add(team);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             dao.closeConnection();
         }
         return teams;
@@ -67,21 +65,20 @@ public class TeamDAOImpl implements TeamDAO {
     public Team getTeam(String teamName) {
         String query = "SELECT * FROM team WHERE team_name = ?";
         Team team = null;
-        ResultSet resultSet = dao.executePreparedStatement(query,new String[]{teamName});
+        ResultSet resultSet = dao.executePreparedStatement(query, new String[]{teamName});
         try {
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 int id = resultSet.getInt(TEAM_ID);
                 String name = resultSet.getString(TEAM_NAME);
                 int points = resultSet.getInt(POINTS);
                 int goalsFor = resultSet.getInt(GOALS_FOR);
                 int goalsAgainst = resultSet.getInt(GOALS_AGAINST);
                 int standing = resultSet.getInt(CURRENT_STANDING);
-                team = new Team(id,name,points,goalsFor,goalsAgainst,standing);
+                team = new Team(id, name, points, goalsFor, goalsAgainst, standing);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             dao.closeConnection();
         }
         return team;
@@ -93,21 +90,20 @@ public class TeamDAOImpl implements TeamDAO {
         Team team = null;
         try {
             PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
-            preparedStatement.setInt(1,teamId);
+            preparedStatement.setInt(1, teamId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 int id = resultSet.getInt(TEAM_ID);
                 String name = resultSet.getString(TEAM_NAME);
                 int points = resultSet.getInt(POINTS);
                 int goalsFor = resultSet.getInt(GOALS_FOR);
                 int goalsAgainst = resultSet.getInt(GOALS_AGAINST);
                 int standing = resultSet.getInt(CURRENT_STANDING);
-                team = new Team(id,name,points,goalsFor,goalsAgainst,standing);
+                team = new Team(id, name, points, goalsFor, goalsAgainst, standing);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             dao.closeConnection();
         }
         return team;
@@ -120,16 +116,16 @@ public class TeamDAOImpl implements TeamDAO {
                 "WHERE TEAM_ID = ?";
         try {
             PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
-            preparedStatement.setString(1,team.getTeamName());
-            preparedStatement.setInt(2,team.getPoints());
-            preparedStatement.setInt(3,team.getGoalsFor());
-            preparedStatement.setInt(4,team.getCurrentStanding());
-            preparedStatement.setInt(5,team.getTeamId());
+            preparedStatement.setString(1, team.getTeamName());
+            preparedStatement.setInt(2, team.getPoints());
+            preparedStatement.setInt(3, team.getGoalsFor());
+            preparedStatement.setInt(4, team.getGoalsAgainst());
+            preparedStatement.setInt(5, team.getCurrentStanding());
+            preparedStatement.setInt(6, team.getTeamId());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             dao.closeConnection();
         }
     }
@@ -139,12 +135,11 @@ public class TeamDAOImpl implements TeamDAO {
         String query = "DELETE team WHERE TEAM_ID = ?";
         try {
             PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
-            preparedStatement.setInt(1,team.getTeamId());
+            preparedStatement.setInt(1, team.getTeamId());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             dao.closeConnection();
         }
     }

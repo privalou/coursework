@@ -5,32 +5,40 @@ public class Player {
     private String playerName;
     private int number;
     private String playerPosition;
-    private Team team;
+    private int teamId;
 
     public Player() {
     }
 
-    public Player(String playerName, int number, String playerPosition, Team team) {
+    public Player(int playerId, String playerName, int number, String playerPosition, int teamId) {
+        this.playerId = playerId;
         this.playerName = playerName;
         this.number = number;
         this.playerPosition = playerPosition;
-        this.team = team;
+        this.teamId = teamId;
+    }
+
+    public Player(String playerName, int number, String playerPosition, int teamId) {
+        this.playerName = playerName;
+        this.number = number;
+        this.playerPosition = playerPosition;
+        this.teamId = teamId;
     }
 
     public int getPlayerId() {
         return playerId;
     }
 
-    public Player(int playerId, String playerName, int number, String playerPosition, Team team) {
-        this.playerId = playerId;
-        this.playerName = playerName;
-        this.number = number;
-        this.playerPosition = playerPosition;
-        this.team = team;
-    }
-
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
     public String getPlayerName() {
@@ -57,11 +65,4 @@ public class Player {
         this.playerPosition = playerPosition;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 }

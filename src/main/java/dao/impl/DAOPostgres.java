@@ -28,7 +28,12 @@ public class DAOPostgres extends DAO {
 
     @Override
     public Connection getConnection() {
-        return connection;
+        try {
+            return DriverManager.getConnection(url,properties);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -44,10 +49,5 @@ public class DAOPostgres extends DAO {
     @Override
     public void connect(String login, String password) {
         super.connect(login, password);
-        try {
-            connection = DriverManager.getConnection(url, properties);
-        } catch (SQLException e) {
-            connection = null;
-        }
     }
 }

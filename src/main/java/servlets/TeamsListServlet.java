@@ -29,8 +29,8 @@ public class TeamsListServlet extends HttpServlet {
         TeamDAO teamDAO = new TeamDAOImpl(dao);
         List<Team> teams = teamDAO.getTeams();
         HttpSession session = req.getSession();
-        session.setAttribute("teams",teams);
-        req.setAttribute("teams",teams);
+        session.setAttribute("teams", teams);
+        req.setAttribute("teams", teams);
         resp.sendRedirect("http://localhost:8080/teamList.jsp");
     }
 

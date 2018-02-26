@@ -34,7 +34,6 @@ public abstract class DAO {
 
     public void connect(String login, String password) {
         registerDriverManager();
-
         properties = new Properties();
         properties.setProperty("password", password);
         properties.setProperty("user", login);
@@ -52,11 +51,11 @@ public abstract class DAO {
         }
     }
 
-    public ResultSet executePreparedStatement(final String sql,@Nullable String... params) {
+    public ResultSet executePreparedStatement(final String sql, @Nullable String... params) {
         ResultSet result = null;
         try {
             PreparedStatement statement = getConnection().prepareStatement(sql);
-            if (params!=null) {
+            if (params != null) {
                 for (int i = 0; i < params.length; i++) {
                     statement.setString(i + 1, params[i]);
                 }

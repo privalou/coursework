@@ -1,36 +1,37 @@
 package model;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Match {
     private int matchId;
-    private Team homeTeam;
-    private Team guestTeam;
+    private int homeTeamId;
+    private int guestTeamId;
     private Date matchday;
     private String stadium;
     private int homeTeamScore;
-    private int guestTeamScote;
+    private int guestTeamScore;
 
     public Match() {
     }
 
-    public Match(Team homeTeam, Team guestTeam, Date matchday, String stadium, int homeTeamScore, int guestTeamScote) {
-        this.homeTeam = homeTeam;
-        this.guestTeam = guestTeam;
+    public Match(int homeTeamId, int guestTeamId, Date matchday, String stadium, int homeTeamScore, int guestTeamScote) {
+        this.homeTeamId = homeTeamId;
+        this.guestTeamId = guestTeamId;
         this.matchday = matchday;
         this.stadium = stadium;
         this.homeTeamScore = homeTeamScore;
-        this.guestTeamScote = guestTeamScote;
+        this.guestTeamScore = guestTeamScote;
     }
 
-    public Match(int matchId, Team homeTeam, Team guestTeam, Date matchday, String stadium, int homeTeamScore, int guestTeamScote) {
+    public Match(int matchId, int homeTeamId, int guestTeamId, Date matchday, String stadium, int homeTeamScore, int guestTeamScote) {
         this.matchId = matchId;
-        this.homeTeam = homeTeam;
-        this.guestTeam = guestTeam;
+        this.homeTeamId = homeTeamId;
+        this.guestTeamId = guestTeamId;
         this.matchday = matchday;
         this.stadium = stadium;
         this.homeTeamScore = homeTeamScore;
-        this.guestTeamScote = guestTeamScote;
+        this.guestTeamScore = guestTeamScote;
     }
 
     public int getMatchId() {
@@ -41,20 +42,20 @@ public class Match {
         this.matchId = matchId;
     }
 
-    public Team getHomeTeam() {
-        return homeTeam;
+    public int getHomeTeamId() {
+        return homeTeamId;
     }
 
-    public void setHomeTeam(Team homeTeam) {
-        this.homeTeam = homeTeam;
+    public void setHomeTeamId(int homeTeamId) {
+        this.homeTeamId = homeTeamId;
     }
 
-    public Team getGuestTeam() {
-        return guestTeam;
+    public int getGuestTeamId() {
+        return guestTeamId;
     }
 
-    public void setGuestTeam(Team guestTeam) {
-        this.guestTeam = guestTeam;
+    public void setGuestTeamId(int guestTeamId) {
+        this.guestTeamId = guestTeamId;
     }
 
     public Date getMatchday() {
@@ -81,11 +82,11 @@ public class Match {
         this.homeTeamScore = homeTeamScore;
     }
 
-    public int getGuestTeamScote() {
-        return guestTeamScote;
+    public int getGuestTeamScore() {
+        return guestTeamScore;
     }
 
-    public void setGuestTeamScote(int guestTeamScote) {
-        this.guestTeamScote = guestTeamScote;
+    public void setGuestTeamScore(int guestTeamScote) {
+        this.guestTeamScore = guestTeamScote;
     }
 }

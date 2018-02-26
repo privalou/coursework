@@ -9,7 +9,7 @@ public interface TeamDAO {
 
     String TEAM_NAME = "team_name";
 
-    String POINTS =  "points";
+    String POINTS = "points";
 
     String GOALS_FOR = "goals_for";
 
