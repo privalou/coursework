@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
 </head>
 <%
-    List<Team> teams = (List<Team>) request.getAttribute("teams");
+    List<Team> teams = (List<Team>) session.getAttribute("teams");
 %>
 <body>
 <h1 class="header" align="center">Premier League Table</h1>

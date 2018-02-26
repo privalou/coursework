@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
 </head>
 <%
-    List<Player> players = (List<Player>) request.getAttribute("players");
+    List<Player> players = (List<Player>) session.getAttribute("players");
     String teamName = (String) session.getAttribute("teamName");
 %>
 <body>

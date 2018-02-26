@@ -85,7 +85,7 @@ public class TeamDAOImpl implements TeamDAO {
         String query = "SELECT * FROM team WHERE team_id = ?";
         Team team = null;
         try (Connection connection = dao.getConnection()) {
-            PreparedStatement preparedStatement = dao.getConnection().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, teamId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -24,10 +25,11 @@ public class TeamListServlet extends HttpServlet {
         dao.connect(DAOPostgres.DEFAULT_LOGIN, DAOPostgres.DEFAULT_PASSWORD);
         TeamDAO teamDAO = new TeamDAOImpl(dao);
         List<Team> teams = teamDAO.getTeams();
-        req.setAttribute("teams", teams);
-        req.setAttribute("dao", dao);
-        req.setAttribute("teamDao", teamDAO);
-        req.setAttribute("teams", teams);
+        HttpSession session = req.getSession();
+        session.setAttribute("teams", teams);
+        session.setAttribute("teamDao", teamDAO);
+        session.setAttribute("teams", teams);
+        session.setAttribute("dao", dao);
         req.getRequestDispatcher("teamList.jsp").forward(req,resp);
     }
 }
