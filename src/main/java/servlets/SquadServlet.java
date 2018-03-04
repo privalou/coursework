@@ -25,10 +25,10 @@ public class SquadServlet extends HttpServlet {
         TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
         List<Player> players = null;
         String teamName = "";
-        if (req.getParameter("teamId")!=null){
+        if (req.getParameter("teamId") != null) {
             int teamId = Integer.parseInt(req.getParameter("teamId"));
             players = playerDAO.getPlayers(teamId);
-            teamName= teamDAO.getTeam(teamId).getTeamName();
+            teamName = teamDAO.getTeam(teamId).getTeamName();
         }
         session.setAttribute("teamName", teamName);
         session.setAttribute("players", players);

@@ -11,7 +11,7 @@
     String teamName = (String) session.getAttribute("teamName");
 %>
 <body>
-<h1 class="header" align="center"><%= teamName %>
+<h1 class="header"н align="center"><%= teamName %>
 </h1>
 <table class="table" align="center">
     <thead>

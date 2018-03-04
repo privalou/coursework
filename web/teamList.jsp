@@ -10,7 +10,7 @@
     List<Team> teams = (List<Team>) session.getAttribute("teams");
 %>
 <body>
-<h1 class="header" align="center">Premier League Table</h1>
+<h1 class="header"c>Premier League Table</h1>
 <table class="table" align="center">
     <thead>
     <td>Position</td>
@@ -36,7 +36,7 @@
         </td>
         <td><%= team.getPoints() %>
         </td>
-        <td>Edit
+        <td><a href="/editTeam?teamId=<%=team.getTeamId()%>">Edit</a>
         </td>
         <td>Delete</td>
     </tr>
