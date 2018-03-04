@@ -28,4 +28,6 @@ public interface TeamDAO {
     void updateTeam(Team team);
 
     void deleteTeam(Team team);
+
+    void deleteTeam(int teamId);
 }

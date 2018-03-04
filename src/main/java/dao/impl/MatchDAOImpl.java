@@ -114,7 +114,7 @@ public class MatchDAOImpl implements MatchDAO {
 
     @Override
     public void deleteMatch(Match match) {
-        String query = "DELETE MATCH WHERE MATCH_ID = ?";
+        String query = "DELETE FROM MATCH WHERE MATCH_ID = ?";
         try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, match.getMatchId());

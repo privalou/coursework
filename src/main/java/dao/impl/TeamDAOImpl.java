@@ -20,14 +20,15 @@ public class TeamDAOImpl implements TeamDAO {
 
     @Override
     public void addTeam(Team team) {
-        String query = "INSERT INTO team (team_name, points, goals_for, goals_against, current_standing) " +
+        String query = "INSERT INTO team (team_name, points, goals_for, goals_against, current_standing) VALUES " +
                 "(?,?,?,?,?)";
         try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, team.getTeamName());
             preparedStatement.setInt(2, team.getPoints());
             preparedStatement.setInt(3, team.getGoalsFor());
-            preparedStatement.setInt(4, team.getCurrentStanding());
+            preparedStatement.setInt(4, team.getGoalsAgainst());
+            preparedStatement.setInt(5, team.getCurrentStanding());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,10 +125,38 @@ public class TeamDAOImpl implements TeamDAO {
 
     @Override
     public void deleteTeam(Team team) {
-        String query = "DELETE team WHERE TEAM_ID = ?";
+        String deleteTeamFromMatch = "DELETE match WHERE HOME_TEAM_ID=? OR GUEST_TEAM_ID=?";
+        String deleteTeamFromPlayers = "DELETE player WHERE TEAM_ID = ?";
+        String deleteTeam = "DELETE team WHERE TEAM_ID = ?";
         try (Connection connection = dao.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteTeamFromMatch);
             preparedStatement.setInt(1, team.getTeamId());
+            preparedStatement.setInt(2, team.getTeamId());
+            preparedStatement.execute();
+            preparedStatement = connection.prepareStatement(deleteTeamFromPlayers);
+            preparedStatement.setInt(1, team.getTeamId());
+            preparedStatement = connection.prepareStatement(deleteTeam);
+            preparedStatement.setInt(1, team.getTeamId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteTeam(int teamId) {
+        String deleteTeamFromMatch = "DELETE FROM match WHERE HOME_TEAM_ID=? OR GUEST_TEAM_ID=?";
+        String deleteTeamFromPlayers = "DELETE FROM player WHERE TEAM_ID = ?";
+        String deleteTeam = "DELETE FROM team WHERE TEAM_ID = ?";
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteTeamFromMatch);
+            preparedStatement.setInt(1, teamId);
+            preparedStatement.setInt(2, teamId);
+            preparedStatement.execute();
+            preparedStatement = connection.prepareStatement(deleteTeamFromPlayers);
+            preparedStatement.setInt(1, teamId);
+            preparedStatement.execute();
+            preparedStatement = connection.prepareStatement(deleteTeam);
+            preparedStatement.setInt(1, teamId);
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

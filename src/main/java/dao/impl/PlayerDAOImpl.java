@@ -142,7 +142,7 @@ public class PlayerDAOImpl implements PlayerDAO {
 
     @Override
     public void deletePlayer(Player player) {
-        String query = "DELETE player WHERE player_id = ?";
+        String query = "DELETE FROM player WHERE player_id = ?";
         try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, player.getPlayerId());

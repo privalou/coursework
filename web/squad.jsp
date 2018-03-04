@@ -11,13 +11,15 @@
     String teamName = (String) session.getAttribute("teamName");
 %>
 <body>
-<h1 class="header"н align="center"><%= teamName %>
+<h1 class="header" align="center"><%= teamName %>
 </h1>
 <table class="table" align="center">
     <thead>
     <td>Number</td>
     <td>Player name</td>
     <td>Player position</td>
+    <td>Edit Player</td>
+    <td>Delete Player</td>
     </thead>
     <% for (Player player :
             players) {
@@ -30,10 +32,12 @@
         </td>
         <td><%= player.getPlayerPosition() %>
         </td>
+        <td>Edit</td>
+        <td>Delete</td>
     </tr>
     </tbody>
     <% }%>
-
 </table>
+
 </body>
 </html>

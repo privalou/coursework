@@ -22,17 +22,15 @@ body {
     color: #000000;
     font-family: 'Caviar Dreams';
     font-size: 12px;
-    margin: 30px 200px;
     padding: 10px 10px 10px 20px;
     color: #000;
-    border-radius: 6px;
     text-align: center;
 }
 
 .button {
     font-family: 'Caviar Dreams';
     display: block;
-    margin: 10px auto 5px;
+    margin: 10px auto;
     width: 130px;
     height: 30px;
     border: 1px solid #000000;
@@ -111,4 +109,14 @@ img {
 
 .table a:hover {
     color: rgba(86, 150, 245, 0.71);
+}
+
+.description a{
+    color: #595959;
+    border: 1px solid #000000;
+    background-color: #fafafa;
+    margin: 10px auto;
+    padding: 6px 44px;
+    text-decoration: none;
+    font-family: 'Caviar Dreams';
 }
