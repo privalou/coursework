@@ -1,4 +1,4 @@
-package servlets;
+package servlets.teams;
 
 import dao.DAO;
 import dao.TeamDAO;

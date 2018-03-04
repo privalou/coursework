@@ -110,12 +110,12 @@ public class PlayerDAOImpl implements PlayerDAO {
             preparedStatement.setInt(1, playerId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                int id = resultSet.getInt(TEAM_ID);
+                int id = resultSet.getInt(PLAYER_ID);
                 String playerName = resultSet.getString(PLAYER_NAME);
                 int number = resultSet.getInt(NUMBER);
                 String playingPosition = resultSet.getString(PLAYING_POSITION);
                 int teamId = resultSet.getInt(TEAM_ID);
-                player = new Player(id, playerName, number, playingPosition, teamId);
+                player = new Player(playerId, playerName, number, playingPosition, teamId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,7 +125,7 @@ public class PlayerDAOImpl implements PlayerDAO {
 
     @Override
     public void updatePlayer(Player player) {
-        String query = "UPDATE player SET player_name = ? , number = ? , playing_position = ? , team_id = ?,  " +
+        String query = "UPDATE player SET player_name = ? , number = ? , playing_position = ? , team_id = ?  " +
                 "WHERE player_id = ?";
         try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -146,6 +146,18 @@ public class PlayerDAOImpl implements PlayerDAO {
         try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, player.getPlayerId());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deletePlayer(int playerId) {
+        String query = "DELETE FROM player WHERE player_id = ?";
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, playerId);
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -37,7 +37,7 @@ public class MatchDAOImpl implements MatchDAO {
     @Override
     public List<Match> getMatches() {
         List<Match> matches = new ArrayList<>();
-        String query = "SELECT * FROM MATCHDAY";
+        String query = "SELECT * FROM MATCH";
         try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();

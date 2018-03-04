@@ -29,4 +29,6 @@ public interface PlayerDAO {
     void updatePlayer(Player player);
 
     void deletePlayer(Player player);
+
+    void deletePlayer(int playerId);
 }

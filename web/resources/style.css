@@ -120,3 +120,42 @@ img {
     text-decoration: none;
     font-family: 'Caviar Dreams';
 }
+
+.tableMatch {
+    margin: 15px auto 20px auto;
+    font-family: 'Caviar Dreams';
+    border: 1px solid #1a1a1a;
+    width: 80%;
+    padding: 0;
+    border-radius: 6px 6px 6px 6px;
+}
+.tableMatch td {
+    text-align: center;
+    padding: 10px 10px;
+    background: rgba(221, 221, 221, 0.75);
+}
+
+.tableMatch th, td {
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+    border-color: black;
+    border-radius: 6px 6px 6px 6px;
+}
+
+.tableMatch thead td {
+    background-color: #2684b5;
+    background-image: radial-gradient(at center, #0098b5, #2684b5);
+    color: white;
+}
+.tableMatch a {
+    color: black;
+    text-decoration: none;
+}
+
+.tableMatch a:visited {
+    color: black;
+}
+
+.tableMatch a:hover {
+    color: rgba(86, 150, 245, 0.71);
+}

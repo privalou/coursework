@@ -1,4 +1,4 @@
-package servlets;
+package servlets.players;
 
 import dao.DAO;
 import dao.PlayerDAO;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/squad")
-public class SquadServlet extends HttpServlet {
+public class TeamPlayersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -32,6 +32,7 @@ public class SquadServlet extends HttpServlet {
         }
         session.setAttribute("teamName", teamName);
         session.setAttribute("players", players);
-        req.getRequestDispatcher("squad.jsp").forward(req,resp);
+        session.setAttribute("playerDao", playerDAO);
+        req.getRequestDispatcher("squad.jsp").forward(req, resp);
     }
 }

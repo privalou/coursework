@@ -15,7 +15,7 @@
         <input name="teamGF" type="text" placeholder="Goals For" class="textbox"> </br>
         <input name="teamGA" type="text" placeholder="Goals Against" class="textbox"> </br>
         <input name="teamPosition" type="text" placeholder="Current Position" class="textbox"> </br>
-        <input type="submit" value="Add" class="button"/>
+        <input type="submit" value="Change" class="button"/>
         <a href="/teamList">Cancel</a>
     </form>
 </div>

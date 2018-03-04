@@ -2,14 +2,15 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="resources/style.css"/>
-</head>
 <%
     List<Player> players = (List<Player>) session.getAttribute("players");
     String teamName = (String) session.getAttribute("teamName");
 %>
+<head>
+    <title><%=teamName%> squad</title>
+    <link rel="stylesheet" type="text/css" href="resources/style.css"/>
+</head>
+
 <body>
 <h1 class="header" align="center"><%= teamName %>
 </h1>
@@ -32,12 +33,16 @@
         </td>
         <td><%= player.getPlayerPosition() %>
         </td>
-        <td>Edit</td>
-        <td>Delete</td>
+        <td><a href="/editPlayer?playerId=<%=player.getPlayerId()%>">Edit</a></td>
+        <td><a href="/deletePlayer?playerId=<%=player.getPlayerId()%>">Delete</a></td>
     </tr>
     </tbody>
     <% }%>
 </table>
+<div class="description">
+    <a href="/addPlayer">Add player</a>
+    <a href="/teamList">Cancel</a>
+</div>
 
 </body>
 </html>

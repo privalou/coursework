@@ -1,4 +1,4 @@
-package servlets;
+package servlets.matches;
 
 import dao.DAO;
 import dao.MatchDAO;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/matchesList")
+@WebServlet("/matches")
 public class MatchesListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,5 +24,6 @@ public class MatchesListServlet extends HttpServlet {
         List<Match> matches = matchDAO.getMatches();
         session.setAttribute("matches", matches);
         session.setAttribute("matchDao", dao);
+        req.getRequestDispatcher("matches.jsp").forward(req,resp);
     }
 }

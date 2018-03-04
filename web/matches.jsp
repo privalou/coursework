@@ -14,7 +14,7 @@
 %>
 <body>
 <h1 class="header">Premier League Table</h1>
-<table class="table" align="center">
+<table class="tableMatch" align="center">
     <thead>
     <td>Home team</td>
     <td>Guest team</td>
@@ -30,9 +30,9 @@
     %>
     <tbody>
     <tr>
-        <td><%= teamDAO.getTeam(match.getHomeTeamId()) %>
+        <td><%= teamDAO.getTeam(match.getHomeTeamId()).getTeamName() %>
         </td>
-        <td><%= teamDAO.getTeam(match.getGuestTeamId()) %></td>
+        <td><%= teamDAO.getTeam(match.getGuestTeamId()).getTeamName() %></td>
         <td><%= match.getMatchday() %>
         </td>
         <td><%= match.getStadium() %>
@@ -48,8 +48,7 @@
     <% }%>
 </table>
 <div class="description">
-    <a href="/addTeam">Go to matches</a>
-    <a href="/addTeam">Add team</a>
+    <a href="/addMatch">Add match</a>
     <a href="/teamList">Cancel</a>
 </div>
 </form>

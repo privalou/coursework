@@ -45,7 +45,6 @@
     <div class="description">
         <a href="/matches">Go to matches</a>
         <a href="/addTeam">Add team</a>
-        <a href="/teamList">Cancel</a>
     </div>
 </form>
 </body>
