@@ -14,13 +14,13 @@
 <div class="description">
     <form action="editTeam" method="post">
         <input id="changeName" name="teamName" type="text" value="<%= team.getTeamName() %>" class="textbox"> </br>
-        <input id="chanePoints" name="teamPoint" type="text" value="<%= team.getPoints() %>" class="textbox"> </br>
-        <input id="changeGF" name="teamGF" type="text" value="<%= team.getGoalsFor() %>" class="textbox"> </br>
-        <input id="changeGA" name="teamGA" type="text" value="<%= team.getGoalsAgainst() %>" class="textbox"> </br>
-        <input id="changePosition" name="teamPosition" type="text" value="<%= team.getCurrentStanding() %>"
+        <input id="chanePoints" name="teamPoint" type="number" value="<%= team.getPoints() %>" class="textbox"> </br>
+        <input id="changeGF" name="teamGF" type="number" value="<%= team.getGoalsFor() %>" class="textbox"> </br>
+        <input id="changeGA" name="teamGA" type="number" value="<%= team.getGoalsAgainst() %>" class="textbox"> </br>
+        <input id="changePosition" name="teamPosition" type="number" value="<%= team.getCurrentStanding() %>"
                class="textbox"> </br>
         <input id="submitButton" type="submit" value="Accept" class="button"/>
-        <a href="/teamList">Cancel</a>
+        <a href="/matches">Cancel</a>
     </form>
 </div>
 </body>

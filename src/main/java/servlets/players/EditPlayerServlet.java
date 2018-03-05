@@ -29,9 +29,6 @@ public class EditPlayerServlet extends HttpServlet {
         }
         session.setAttribute("playerToEdit", player);
         team = teamDAO.getTeam(player.getTeamId());
-        List<Team> teams = (List<Team>) session.getAttribute("teams");
-        teams.remove(team);
-        session.setAttribute("teams", teams);
         session.setAttribute("playersTeam", team);
         req.getRequestDispatcher("editPlayer.jsp").forward(req, resp);
     }
@@ -58,6 +55,7 @@ public class EditPlayerServlet extends HttpServlet {
             player.setPlayerName(playerName);
             player.setNumber(number);
             player.setPlayerPosition(playingPosition);
+            player.setTeamId(team.getTeamId());
             playerDAO.updatePlayer(player);
             resp.sendRedirect("/squad?teamId=" + team.getTeamId());
         }

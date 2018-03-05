@@ -23,7 +23,7 @@ public class MatchesListServlet extends HttpServlet {
         MatchDAO matchDAO = new MatchDAOImpl(dao);
         List<Match> matches = matchDAO.getMatches();
         session.setAttribute("matches", matches);
-        session.setAttribute("matchDao", dao);
+        session.setAttribute("matchDao", matchDAO);
         req.getRequestDispatcher("matches.jsp").forward(req,resp);
     }
 }

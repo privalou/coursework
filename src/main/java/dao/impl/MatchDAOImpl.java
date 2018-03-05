@@ -75,6 +75,7 @@ public class MatchDAOImpl implements MatchDAO {
         Match match = null;
         try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, matchId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(MATCH_ID);

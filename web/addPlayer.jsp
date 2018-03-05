@@ -16,7 +16,7 @@
 <div class="description">
     <form action="addPlayer" method="post">
         <input name="playerName" type="text" placeholder="Player name" class="textbox"> </br>
-        <input name="number" type="text" placeholder="Number" class="textbox"> </br>
+        <input name="number" type="number" placeholder="1" class="textbox"> </br>
         <input name="playingPosition" type="text" placeholder="Playing position" class="textbox"> </br>
         <select class="description" name="teamSelector">
             <%
