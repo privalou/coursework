@@ -55,17 +55,22 @@ public class EditMatchServlet extends HttpServlet {
             MatchDAO matchDAO = (MatchDAO) session.getAttribute("matchDao");
             homeTeam = teamDAO.getTeam(req.getParameter("teamSelectorHome"));
             guestTeam = teamDAO.getTeam(req.getParameter("teamSelectorGuest"));
-            matchday = match.getMatchday();
-            if (req.getParameter("matchday") != null)
+            String matchdayReq = req.getParameter("matchday");
+            if (req.getParameter("matchday").equals("")) {
+                matchday = match.getMatchday();
+            } else {
                 matchday = Date.valueOf(req.getParameter("matchday"));
+            }
             stadium = req.getParameter("stadium");
             homeTeamScore = Integer.parseInt(req.getParameter("homeTeamScore"));
             guestTeamScore = Integer.parseInt(req.getParameter("guestTeamScore"));
             match.setHomeTeamId(homeTeam.getTeamId());
             match.setGuestTeamId(guestTeam.getTeamId());
             match.setMatchday(matchday);
+            match.setStadium(stadium);
             match.setHomeTeamScore(homeTeamScore);
-            matchDAO.addMatch(match);
+            match.setGuestTeamScore(guestTeamScore);
+            matchDAO.updateMatch(match);
             resp.sendRedirect("/matches");
         }
     }

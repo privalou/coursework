@@ -33,4 +33,6 @@ public interface MatchDAO {
     void updateMatch(Match match);
 
     void deleteMatch(Match match);
+
+    void deleteMatch(int matchId);
 }

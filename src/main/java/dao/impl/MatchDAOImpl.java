@@ -123,4 +123,15 @@ public class MatchDAOImpl implements MatchDAO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void deleteMatch(int matchId) {
+        String query = "DELETE FROM MATCH WHERE MATCH_ID = ?";
+        try (Connection connection = dao.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, matchId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
