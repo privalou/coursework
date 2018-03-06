@@ -15,6 +15,7 @@
 </h1>
 <div class="description">
     <form action="addMatch" method="post">
+        Select home and guest teams </br>
         <select class="description" name="teamSelectorHome">
             <%
                 for (Team team : teams) {
@@ -37,9 +38,13 @@
                 }
             %>
         </select></br>
+        Matchday </br>
         <input name="matchday" type="date"></br>
+        Stadium </br>
         <input name="stadium" type="text" placeholder="Stadium" class="textbox"> </br>
+        Home team score </br>
         <input name="homeTeamScore" type="number" placeholder="0" class="textbox"> </br>
+        Guest team score </br>
         <input name="guestTeamScore" type="number" placeholder="0" class="textbox"> </br>
         <input type="submit" value="Add match" class="button"/>
         <a href="/teamList">Cancel</a>

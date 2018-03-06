@@ -19,6 +19,7 @@
 </h1>
 <div class="description">
     <form action="editMatch" method="post">
+        Select home and guest teams </br>
         <select class="description" name="teamSelectorHome">
             <option><%=homeTeam.getTeamName()%>
             </option>
@@ -45,9 +46,13 @@
                 }
             %>
         </select></br>
+        Matchday </br>
         <input name="matchday" type="date"></br>
+        Stadium </br>
         <input name="stadium" type="text" value="<%=match.getStadium()%>" class="textbox"> </br>
+        Home team score </br>
         <input name="homeTeamScore" type="number" value="<%=match.getHomeTeamScore()%>" class="textbox"> </br>
+        Guest team score </br>
         <input name="guestTeamScore" type="number" value="<%=match.getGuestTeamScore()%>" class=" textbox"> </br>
         <input type="submit" value="Edit match" class="button"/>
         <a href="/matches">Cancel</a>

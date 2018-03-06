@@ -17,9 +17,13 @@
 </h1>
 <div class="description">
     <form action="editPlayer" method="post">
+        Name </br>
         <input name="playerName" type="text" value="<%=player.getPlayerName()%>" class="textbox"> </br>
+        Number </br>
         <input name="number" type="number" value="<%=player.getNumber()%>" class="textbox"> </br>
+        Position </br>
         <input name="playingPosition" type="text" value="<%=player.getPlayerPosition()%>" class="textbox"> </br>
+        Select team </br>
         <select name="teamSelector" class="description">
             <option><%=team.getTeamName()%></option>
             <%

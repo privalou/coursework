@@ -119,6 +119,7 @@ public class MatchDAOImpl implements MatchDAO {
         try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, match.getMatchId());
+            preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,6 +131,7 @@ public class MatchDAOImpl implements MatchDAO {
         try (Connection connection = dao.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, matchId);
+            preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

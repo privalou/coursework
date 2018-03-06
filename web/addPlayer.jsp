@@ -15,9 +15,13 @@
 </h1>
 <div class="description">
     <form action="addPlayer" method="post">
+        Name </br>
         <input name="playerName" type="text" placeholder="Player name" class="textbox"> </br>
+        Number </br>
         <input name="number" type="number" placeholder="1" class="textbox"> </br>
+        Position </br>
         <input name="playingPosition" type="text" placeholder="Playing position" class="textbox"> </br>
+        Select team </br>
         <select class="description" name="teamSelector">
             <%
                 for (Team team : teams) {
