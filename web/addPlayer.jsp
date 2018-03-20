@@ -1,15 +1,10 @@
-<%@ page import="model.Team" %>
-<%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Add Player</title>
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
 </head>
-<%
-    List<Team> teams = (List<Team>) session.getAttribute("teams");
-
-%>
 <body>
 <h1 class="header">Add player
 </h1>
@@ -23,15 +18,10 @@
         <input name="playingPosition" type="text" placeholder="Playing position" class="textbox"> </br>
         Select team </br>
         <select class="description" name="teamSelector">
-            <%
-                for (Team team : teams) {
-
-            %>
-            <option><%=team.getTeamName() %>
-            </option>
-            <%
-                }
-            %>
+            <c:forEach items="${teams}" var="team">
+                <option>${team.teamName}
+                </option>
+            </c:forEach>
         </select>
         <input type="submit" value="Add player" class="button"/>
         <a href="/teamList">Cancel</a>

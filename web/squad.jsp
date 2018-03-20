@@ -1,18 +1,13 @@
-<%@ page import="model.Player" %>
-<%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-<%
-    List<Player> players = (List<Player>) session.getAttribute("players");
-    String teamName = (String) session.getAttribute("teamName");
-%>
 <head>
-    <title><%=teamName%> squad</title>
+    <title>${teamName} squad</title>
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
 </head>
 
 <body>
-<h1 class="header" align="center"><%= teamName %>
+<h1 class="header" align="center">${teamName}
 </h1>
 <table class="table" align="center">
     <thead>
@@ -22,22 +17,20 @@
     <td>Edit Player</td>
     <td>Delete Player</td>
     </thead>
-    <% for (Player player :
-            players) {
-    %>
     <tbody>
+    <c:forEach items="${players}" var="player">
     <tr>
-        <td><%= player.getNumber() %>
+        <td>${player.number}
         </td>
-        <td><%= player.getPlayerName() %>
+        <td>${player.playerName}
         </td>
-        <td><%= player.getPlayerPosition() %>
+        <td>${player.playerPosition}
         </td>
-        <td><a href="/editPlayer?playerId=<%=player.getPlayerId()%>">Edit</a></td>
-        <td><a href="/deletePlayer?playerId=<%=player.getPlayerId()%>">Delete</a></td>
+        <td><a href="/editPlayer?playerId=${player.playerId}">Edit</a></td>
+        <td><a href="/deletePlayer?playerId=${player.playerId}">Delete</a></td>
     </tr>
     </tbody>
-    <% }%>
+    </c:forEach>
 </table>
 <div class="description">
     <a href="/addPlayer">Add player</a>

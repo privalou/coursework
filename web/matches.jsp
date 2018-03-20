@@ -1,17 +1,10 @@
-<%@ page import="model.Team" %>
-<%@ page import="java.util.List" %>
-<%@ page import="model.Match" %>
-<%@ page import="dao.TeamDAO" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Teams</title>
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
 </head>
-<%
-    List<Match> matches = (List<Match>) session.getAttribute("matches");
-    TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
-%>
 <body>
 <h1 class="header">Premier League Table</h1>
 <table class="tableMatch" align="center">
@@ -25,27 +18,25 @@
     <td>Edit match</td>
     <td>Delete match</td>
     </thead>
-    <% for (Match match :
-            matches) {
-    %>
     <tbody>
+    <c:forEach items="${matches}" var="match">
     <tr>
-        <td><%= teamDAO.getTeam(match.getHomeTeamId()).getTeamName() %>
+        <td>${teamDao.getTeam(match.getHomeTeamId()).getTeamName()}
         </td>
-        <td><%= teamDAO.getTeam(match.getGuestTeamId()).getTeamName() %></td>
-        <td><%= match.getMatchday() %>
+        <td>${teamDao.getTeam(match.getGuestTeamId()).getTeamName()}</td>
+        <td>${match.matchday}
         </td>
-        <td><%= match.getStadium() %>
+        <td>${match.stadium}
         </td>
-        <td><%= match.getHomeTeamScore() %>
+        <td>${match.homeTeamScore}
         </td>
-        <td><%= match.getGuestTeamScore() %>
+        <td>${match.guestTeamScore}
         </td>
-        <td><a href="/editMatch?matchId=<%=match.getMatchId()%>">Edit</a></td>
-        <td><a href="/deleteMatch?matchId=<%=match.getMatchId()%>">Delete</a></td>
+        <td><a href="/editMatch?matchId=${match.matchId}">Edit</a></td>
+        <td><a href="/deleteMatch?matchId=${match.matchId}">Delete</a></td>
     </tr>
     </tbody>
-    <% }%>
+    </c:forEach>
 </table>
 <div class="description">
     <a href="/addMatch">Add match</a>

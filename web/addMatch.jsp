@@ -1,15 +1,10 @@
-<%@ page import="model.Team" %>
-<%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Add Match</title>
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
 </head>
-<%
-    List<Team> teams = (List<Team>) session.getAttribute("teams");
-
-%>
 <body>
 <h1 class="header">Add match
 </h1>
@@ -17,26 +12,16 @@
     <form action="addMatch" method="post">
         Select home and guest teams </br>
         <select class="description" name="teamSelectorHome">
-            <%
-                for (Team team : teams) {
-
-            %>
-            <option><%=team.getTeamName() %>
-            </option>
-            <%
-                }
-            %>
+            <c:forEach items="${teams}" var="team">
+                <option>${team.teamName}
+                </option>
+            </c:forEach>
         </select>
         <select class="description" name="teamSelectorGuest">
-            <%
-                for (Team team : teams) {
-
-            %>
-            <option><%=team.getTeamName() %>
-            </option>
-            <%
-                }
-            %>
+            <c:forEach items="${teams}" var="team">
+                <option>${team.teamName}
+                </option>
+            </c:forEach>
         </select></br>
         Matchday </br>
         <input name="matchday" type="date"></br>

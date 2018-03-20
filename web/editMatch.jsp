@@ -1,19 +1,10 @@
-<%@ page import="model.Player" %>
-<%@ page import="model.Team" %>
-<%@ page import="java.util.List" %>
-<%@ page import="model.Match" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Edit match</title>
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
 </head>
-<%
-    List<Team> teams = (List<Team>) session.getAttribute("teams");
-    Match match = (Match) session.getAttribute("matchToEdit");
-    Team homeTeam = (Team) session.getAttribute("homeTeam");
-    Team guestTeam = (Team) session.getAttribute("guestTeam");
-%>
 <body>
 <h1 class="header">Add Team
 </h1>
@@ -21,39 +12,29 @@
     <form action="editMatch" method="post">
         Select home and guest teams </br>
         <select class="description" name="teamSelectorHome">
-            <option><%=homeTeam.getTeamName()%>
+            <option>${homeTeam.teamName}
             </option>
-            <%
-                for (Team team : teams) {
-
-            %>
-            <option><%=team.getTeamName() %>
+            <c:forEach items="${teams}" var="team">
+            <option>${team.teamName}
             </option>
-            <%
-                }
-            %>
+            </c:forEach>
         </select>
         <select class="description" name="teamSelectorGuest">
-            <option><%=guestTeam.getTeamName()%>
+            <option>${guestTeam.teamName}
             </option>
-            <%
-                for (Team team : teams) {
-
-            %>
-            <option><%=team.getTeamName() %>
-            </option>
-            <%
-                }
-            %>
+            <c:forEach items="${teams}" var="team">
+                <option>${team.teamName}
+                </option>
+            </c:forEach>
         </select></br>
         Matchday </br>
-        <input name="matchday" type="date"></br>
+        <input name="matchday" type="date" value="${matchToEdit.matchday}"></br>
         Stadium </br>
-        <input name="stadium" type="text" value="<%=match.getStadium()%>" class="textbox"> </br>
+        <input name="stadium" type="text" value="${matchToEdit.stadium}" class="textbox"> </br>
         Home team score </br>
-        <input name="homeTeamScore" type="number" value="<%=match.getHomeTeamScore()%>" class="textbox"> </br>
+        <input name="homeTeamScore" type="number" value="${matchToEdit.homeTeamScore}" class="textbox"> </br>
         Guest team score </br>
-        <input name="guestTeamScore" type="number" value="<%=match.getGuestTeamScore()%>" class=" textbox"> </br>
+        <input name="guestTeamScore" type="number" value="${matchToEdit.guestTeamScore}" class=" textbox"> </br>
         <input type="submit" value="Edit match" class="button"/>
         <a href="/matches">Cancel</a>
     </form>

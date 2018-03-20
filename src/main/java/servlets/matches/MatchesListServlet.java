@@ -2,6 +2,7 @@ package servlets.matches;
 
 import dao.DAO;
 import dao.MatchDAO;
+import dao.TeamDAO;
 import dao.impl.MatchDAOImpl;
 import model.Match;
 
@@ -22,6 +23,7 @@ public class MatchesListServlet extends HttpServlet {
         DAO dao = (DAO) session.getAttribute("dao");
         MatchDAO matchDAO = new MatchDAOImpl(dao);
         List<Match> matches = matchDAO.getMatches();
+        TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
         session.setAttribute("matches", matches);
         session.setAttribute("matchDao", matchDAO);
         req.getRequestDispatcher("matches.jsp").forward(req,resp);
