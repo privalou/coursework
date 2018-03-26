@@ -2,6 +2,9 @@ package servlets.matches;
 
 import dao.MatchDAO;
 import dao.PlayerDAO;
+import dao.impl.DAOPostgres;
+import dao.impl.MatchDAOImpl;
+import dao.impl.TeamDAOImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +18,7 @@ import java.io.IOException;
 public class DeleteMatchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        MatchDAO matchDAO = (MatchDAO) session.getAttribute("matchDao");
+        MatchDAO matchDAO = new MatchDAOImpl(DAOPostgres.getInstance());
         if (req.getParameter("matchId") != null) {
             int matchId = Integer.parseInt(req.getParameter("matchId"));
             matchDAO.deleteMatch(matchId);

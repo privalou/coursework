@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DAOPostgres extends DAO {
+    private static DAO dao;
     public static final String DEFAULT_HOST = "localhost";
     public static final String DEFAULT_DATABASE = "coursework";
     public static final String DEFAULT_LOGIN = "postgres";
@@ -41,5 +42,14 @@ public class DAOPostgres extends DAO {
     @Override
     public void connect(String login, String password) {
         super.connect(login, password);
+    }
+
+    public static void initInstance(){
+        if (dao==null){
+            dao = new DAOPostgres();
+        }
+    }
+    public static DAO getInstance(){
+        return dao;
     }
 }

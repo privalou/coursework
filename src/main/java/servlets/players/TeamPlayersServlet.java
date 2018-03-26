@@ -1,9 +1,10 @@
 package servlets.players;
 
-import dao.DAO;
 import dao.PlayerDAO;
 import dao.TeamDAO;
+import dao.impl.DAOPostgres;
 import dao.impl.PlayerDAOImpl;
+import dao.impl.TeamDAOImpl;
 import model.Player;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,10 +19,8 @@ import java.util.List;
 public class TeamPlayersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        DAO dao = (DAO) session.getAttribute("dao");
-        PlayerDAO playerDAO = new PlayerDAOImpl(dao);
-        TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
+        PlayerDAO playerDAO = new PlayerDAOImpl(DAOPostgres.getInstance());
+        TeamDAO teamDAO = new TeamDAOImpl(DAOPostgres.getInstance());
         List<Player> players = null;
         String teamName = "";
         if (req.getParameter("teamId") != null) {
@@ -30,9 +28,8 @@ public class TeamPlayersServlet extends HttpServlet {
             players = playerDAO.getPlayers(teamId);
             teamName = teamDAO.getTeam(teamId).getTeamName();
         }
-        session.setAttribute("teamName", teamName);
-        session.setAttribute("players", players);
-        session.setAttribute("playerDao", playerDAO);
+        req.setAttribute("teamName", teamName);
+        req.setAttribute("players", players);
         req.getRequestDispatcher("squad.jsp").forward(req, resp);
     }
 }

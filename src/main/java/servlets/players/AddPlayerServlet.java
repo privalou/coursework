@@ -1,8 +1,10 @@
 package servlets.players;
 
-import dao.DAO;
 import dao.PlayerDAO;
 import dao.TeamDAO;
+import dao.impl.DAOPostgres;
+import dao.impl.PlayerDAOImpl;
+import dao.impl.TeamDAOImpl;
 import model.Player;
 import model.Team;
 
@@ -11,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/addPlayer")
@@ -31,9 +32,8 @@ public class AddPlayerServlet extends HttpServlet {
                 req.getParameter("number") != null &&
                 req.getParameter("playingPosition") != null &&
                 req.getParameter("teamSelector") != null) {
-            HttpSession session = req.getSession();
-            TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
-            PlayerDAO playerDAO = (PlayerDAO) session.getAttribute("playerDao");
+            TeamDAO teamDAO = new TeamDAOImpl(DAOPostgres.getInstance());
+            PlayerDAO playerDAO = new PlayerDAOImpl(DAOPostgres.getInstance());
             playerName = req.getParameter("playerName");
             number = Integer.parseInt(req.getParameter("number"));
             playingPosition = req.getParameter("playingPosition");

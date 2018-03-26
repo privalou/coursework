@@ -19,7 +19,7 @@
         <input name="teamGA" type="number" placeholder="0" class="textbox"> </br>
         Current position </br>
         <input name="teamPosition" type="number" placeholder="1" class="textbox"> </br>
-        <input type="submit" value="Change" class="button"/>
+        <input type="submit" value="Add team" class="button"/>
         <a href="/teamList">Cancel</a>
     </form>
 </div>

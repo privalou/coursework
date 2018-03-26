@@ -3,6 +3,10 @@ package servlets.matches;
 import dao.MatchDAO;
 import dao.PlayerDAO;
 import dao.TeamDAO;
+import dao.impl.DAOPostgres;
+import dao.impl.MatchDAOImpl;
+import dao.impl.PlayerDAOImpl;
+import dao.impl.TeamDAOImpl;
 import model.Match;
 import model.Player;
 import model.Team;
@@ -20,18 +24,17 @@ import java.sql.Date;
 public class EditMatchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
-        MatchDAO matchDAO = (MatchDAO) session.getAttribute("matchDao");
+        TeamDAO teamDAO = new TeamDAOImpl(DAOPostgres.getInstance());
+        MatchDAO matchDAO = new MatchDAOImpl(DAOPostgres.getInstance());
         Match match;
         if (req.getParameter("matchId") != null) {
             int matchId = Integer.parseInt(req.getParameter("matchId"));
             match = matchDAO.getMatch(matchId);
-            session.setAttribute("matchToEdit", match);
+            req.getSession().setAttribute("matchToEdit", match);
             Team homeTeam = teamDAO.getTeam(match.getHomeTeamId());
             Team guestTeam = teamDAO.getTeam(match.getGuestTeamId());
-            session.setAttribute("homeTeam", homeTeam);
-            session.setAttribute("guestTeam", guestTeam);
+            req.setAttribute("homeTeam", homeTeam);
+            req.setAttribute("guestTeam", guestTeam);
             req.getRequestDispatcher("editMatch.jsp").forward(req, resp);
         }
     }
@@ -49,13 +52,11 @@ public class EditMatchServlet extends HttpServlet {
                 req.getParameter("stadium") != null &&
                 req.getParameter("homeTeamScore") != null &&
                 req.getParameter("guestTeamScore") != null) {
-            HttpSession session = req.getSession();
-            Match match = (Match) session.getAttribute("matchToEdit");
-            TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
-            MatchDAO matchDAO = (MatchDAO) session.getAttribute("matchDao");
+            Match match = (Match) req.getSession().getAttribute("matchToEdit");
+            TeamDAO teamDAO = new TeamDAOImpl(DAOPostgres.getInstance());
+            MatchDAO matchDAO = new MatchDAOImpl(DAOPostgres.getInstance());
             homeTeam = teamDAO.getTeam(req.getParameter("teamSelectorHome"));
             guestTeam = teamDAO.getTeam(req.getParameter("teamSelectorGuest"));
-            String matchdayReq = req.getParameter("matchday");
             if (req.getParameter("matchday").equals("")) {
                 matchday = match.getMatchday();
             } else {

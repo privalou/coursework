@@ -2,6 +2,9 @@ package servlets.players;
 
 import dao.PlayerDAO;
 import dao.TeamDAO;
+import dao.impl.DAOPostgres;
+import dao.impl.PlayerDAOImpl;
+import dao.impl.TeamDAOImpl;
 import model.Player;
 import model.Team;
 
@@ -10,26 +13,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/editPlayer")
 public class EditPlayerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
-        PlayerDAO playerDAO = (PlayerDAO) session.getAttribute("playerDao");
+        TeamDAO teamDAO = new TeamDAOImpl(DAOPostgres.getInstance());
+        PlayerDAO playerDAO = new PlayerDAOImpl(DAOPostgres.getInstance());
         Player player = null;
         Team team;
         if (req.getParameter("playerId") != null) {
             int playerId = Integer.parseInt(req.getParameter("playerId"));
             player = playerDAO.getPlayer(playerId);
         }
-        session.setAttribute("playerToEdit", player);
+        req.getSession().setAttribute("playerToEdit", player);
         team = teamDAO.getTeam(player.getTeamId());
-        session.setAttribute("playersTeam", team);
+        req.setAttribute("playersTeam", team);
         req.getRequestDispatcher("editPlayer.jsp").forward(req, resp);
     }
 
@@ -43,15 +43,14 @@ public class EditPlayerServlet extends HttpServlet {
                 req.getParameter("number") != null &&
                 req.getParameter("playingPosition") != null &&
                 req.getParameter("teamSelector") != null) {
-            HttpSession session = req.getSession();
-            TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
-            PlayerDAO playerDAO = (PlayerDAO) session.getAttribute("playerDao");
+            TeamDAO teamDAO = new TeamDAOImpl(DAOPostgres.getInstance());
+            PlayerDAO playerDAO = new PlayerDAOImpl(DAOPostgres.getInstance());
             playerName = req.getParameter("playerName");
             number = Integer.parseInt(req.getParameter("number"));
             playingPosition = req.getParameter("playingPosition");
             String teamName = req.getParameter("teamSelector");
             team = teamDAO.getTeam(teamName);
-            Player player = (Player) session.getAttribute("playerToEdit");
+            Player player = (Player) req.getSession().getAttribute("playerToEdit");
             player.setPlayerName(playerName);
             player.setNumber(number);
             player.setPlayerPosition(playingPosition);

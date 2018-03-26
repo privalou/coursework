@@ -3,6 +3,9 @@ package servlets.matches;
 import dao.MatchDAO;
 import dao.PlayerDAO;
 import dao.TeamDAO;
+import dao.impl.DAOPostgres;
+import dao.impl.MatchDAOImpl;
+import dao.impl.TeamDAOImpl;
 import model.Match;
 import model.Player;
 import model.Team;
@@ -37,9 +40,8 @@ public class AddMatchServlet extends HttpServlet {
                 req.getParameter("stadium") != null &&
                 req.getParameter("homeTeamScore") != null &&
                 req.getParameter("guestTeamScore") != null) {
-            HttpSession session = req.getSession();
-            TeamDAO teamDAO = (TeamDAO) session.getAttribute("teamDao");
-            MatchDAO matchDAO = (MatchDAO) session.getAttribute("matchDao");
+            TeamDAO teamDAO = new TeamDAOImpl(DAOPostgres.getInstance());
+            MatchDAO matchDAO = new MatchDAOImpl(DAOPostgres.getInstance());
             homeTeam = teamDAO.getTeam(req.getParameter("teamSelectorHome"));
             guestTeam = teamDAO.getTeam(req.getParameter("teamSelectorGuest"));
             matchday = Date.valueOf(req.getParameter("matchday"));
