@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
 </head>
 <body>
-<h1 class="header">Add Team
+<h1 class="header">Edit player
 </h1>
 <div class="description">
     <form action="editPlayer" method="post">

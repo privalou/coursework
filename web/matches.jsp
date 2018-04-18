@@ -4,6 +4,7 @@
 <head>
     <title>Teams</title>
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/modalDialog.css">
 </head>
 <body>
 <h1 class="header">Premier League Table</h1>
@@ -39,9 +40,40 @@
     </c:forEach>
 </table>
 <div class="description">
-    <a href="/addMatch">Add match</a>
+    <a href="#openModal">Add match</a>
     <a href="/teamList">Cancel</a>
 </div>
 </form>
+<div id="openModal" class="modalDialog">
+    <div>
+        <a href="#close" title="Close" class="close">X</a>
+        <div>
+            <form action="addMatch" method="post">
+                Select home and guest teams </br>
+                <select class="description" name="teamSelectorHome">
+                    <c:forEach items="${teams}" var="team">
+                        <option>${team.teamName}
+                        </option>
+                    </c:forEach>
+                </select>
+                <select class="description" name="teamSelectorGuest">
+                    <c:forEach items="${teams}" var="team">
+                        <option>${team.teamName}
+                        </option>
+                    </c:forEach>
+                </select></br>
+                Matchday </br>
+                <input name="matchday" type="date"></br>
+                Stadium </br>
+                <input name="stadium" type="text" placeholder="Stadium" class="textbox"> </br>
+                Home team score </br>
+                <input name="homeTeamScore" type="number" placeholder="0" class="textbox"> </br>
+                Guest team score </br>
+                <input name="guestTeamScore" type="number" placeholder="0" class="textbox"> </br>
+                <input type="submit" value="Add match" class="button"/>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

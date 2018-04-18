@@ -21,7 +21,7 @@
         <input id="changePosition" name="teamPosition" type="number" value="${teamToEdit.currentStanding}"
                class="textbox"> </br>
         <input id="submitButton" type="submit" value="Accept" class="button"/>
-        <a href="/matches">Cancel</a>
+        <a href="/teamList">Cancel</a>
     </form>
 </div>
 </body>

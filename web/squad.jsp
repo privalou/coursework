@@ -4,6 +4,7 @@
 <head>
     <title>${teamName} squad</title>
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/modalDialog.css">
 </head>
 
 <body>
@@ -33,9 +34,31 @@
     </c:forEach>
 </table>
 <div class="description">
-    <a href="/addPlayer">Add player</a>
+    <a href="#openModal">Add player</a>
     <a href="/teamList">Cancel</a>
 </div>
-
+<div id="openModal" class="modalDialog">
+    <div>
+        <a href="#close" title="Close" class="close">X</a>
+        <div>
+            <form action="addPlayer" method="post">
+                Name </br>
+                <input name="playerName" type="text" placeholder="Player name" class="textbox"> </br>
+                Number </br>
+                <input name="number" type="number" placeholder="1" class="textbox"> </br>
+                Position </br>
+                <input name="playingPosition" type="text" placeholder="Playing position" class="textbox"> </br>
+                Select team </br>
+                <select class="description" name="teamSelector">
+                    <c:forEach items="${teams}" var="team">
+                        <option>${team.teamName}
+                        </option>
+                    </c:forEach>
+                </select>
+                <input type="submit" value="Add player" class="button"/>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
